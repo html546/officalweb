@@ -1,0 +1,92 @@
+# CheTuoChe React to Nuxt Migration Guide
+
+This document outlines the technical specifications and design system details required to migrate the current React/Next.js application to a Vue/Nuxt 3 architecture.
+
+## 1. Project Overview
+- **Current Stack**: React 18, Next.js (App Router), Tailwind CSS v4, Motion (Framer Motion), Lucide React.
+- **Target Stack**: Vue 3, Nuxt 3, Tailwind CSS v4, Motion Vue (or similar), Lucide Vue.
+
+## 2. Design System
+The application adheres to a strict color scheme and design language.
+
+### Color Palette
+| Token Name | Hex Value | Usage |
+|---|---|---|
+| **Navy Blue** | `#0B2747` | Primary Brand, Headings, Footer Background |
+| **Safety Orange** | `#FF6B00` | Accent, CTAs, Rescue, Alerts |
+| **Tech Blue** | `#006EFF` | Links, Active States, Icons |
+| **Trust Blue** | `#F0F7FF` | Backgrounds (Trust sections) |
+| **Content Gray** | `#F8F9FB` | General Content Backgrounds |
+| **Text Body** | `#4B5563` | Standard Body Text |
+
+### Typography
+- **Font Family**: 'Noto Sans SC', system-ui, sans-serif.
+- **Styling**: Handled primarily via Tailwind CSS utility classes.
+
+### Tailwind Configuration (v4)
+The current project uses Tailwind v4 with CSS variables defined in `/src/styles/theme.css`. Ensure these variables are ported to your Nuxt global CSS or `nuxt.config.ts`.
+
+## 3. Route Mapping (App Router -> Nuxt Pages)
+The React application uses the Next.js App Router structure in `src/app`.
+
+| React Path (`src/app/...`) | Nuxt Path (`pages/...`) | Description |
+|---|---|---|
+| `page.tsx` | `index.vue` | Homepage |
+| `big-carrier/page.tsx` | `big-carrier/index.vue` | Big Carrier Solutions |
+| `small-carrier/page.tsx` | `small-carrier/index.vue` | Small Carrier Solutions |
+| `luxury-transport/page.tsx` | `luxury-transport/index.vue` | Luxury/Valet Services |
+| `personal-travel/page.tsx` | `personal-travel/index.vue` | Personal Travel/Rescue |
+| `supply-chain/page.tsx` | `supply-chain/index.vue` | Supply Chain Solutions |
+| `pricing/page.tsx` | `pricing/index.vue` | Pricing Page |
+| `driver-app/` (Implicit in components) | `app/driver/index.vue` | Driver App Landing Page |
+| `client-app/` (Implicit in components) | `app/client/index.vue` | Client App Landing Page |
+| `news/` (Implicit in components) | `news/index.vue` | News & Insights |
+
+## 4. Component Architecture
+Most components are located in `src/app/components`. They typically follow a pattern of "Page Section" components.
+
+### Core Layout Components
+- `Header.tsx` -> `components/TheHeader.vue`: Main navigation bar.
+- `Footer.tsx` -> `components/TheFooter.vue`: Site footer with links.
+- `StickyNav.tsx` -> `components/StickyNav.vue`: Secondary navigation for long pages.
+
+### Shared UI Components (Shadcn UI)
+The project uses Shadcn UI components in `src/app/components/ui`. You should use **Shadcn Vue** or equivalent Headless UI + Tailwind implementations for:
+- Buttons (`button.tsx`)
+- Cards (`card.tsx`)
+- Dialogs/Modals (`dialog.tsx`)
+- Accordions (`accordion.tsx`)
+- Forms (`input.tsx`, `label.tsx`, `select.tsx`)
+
+### Key Functional Components
+- **Calculators**: `PriceCalculator.tsx` (Logic needs to be ported to Vue Composables).
+- **Interactive Maps**: Check for `Map` components (if any) or image-based map representations.
+- **Carousels**: `Carousel.tsx` (currently Embla Carousel) -> Use Embla Carousel Vue or Swiper.
+
+## 5. Dependency Migration
+
+| React Package | Vue/Nuxt Equivalent | Notes |
+|---|---|---|
+| `lucide-react` | `lucide-vue-next` | Icon names are identical. |
+| `motion/react` / `framer-motion` | `@vueuse/motion` or `<Transition>` | Motion syntax is similar but Vue uses directives (v-motion). |
+| `react-hook-form` | `vee-validate` | For form handling and validation. |
+| `embla-carousel-react` | `embla-carousel-vue` | For sliders/carousels. |
+| `next-themes` | `@nuxtjs/color-mode` | For dark mode support (if used). |
+| `sonner` | `vue-sonner` | For toast notifications. |
+
+## 6. Assets & Images
+- **Source**: Images are currently imported from `src/app/images/index.ts`.
+- **Handling**: In Nuxt, move static assets to the `public/` directory or use the `assets/` directory with Vite processing.
+- **Figma Assets**: The `figma:asset` imports in the React code are specific to the Figma plugin environment. **You must replace these with the actual file URLs or paths exported from the React build.**
+- **Unsplash URLs**: External Unsplash URLs in `src/app/images/index.ts` can be used directly.
+
+## 7. Special Instructions for Cursor
+1.  **Extract Assets**: Before migrating, ensure you have all image assets saved locally, as `figma:asset` imports won't work outside this environment.
+2.  **Logic Porting**:
+    - `useState` -> `ref()`
+    - `useEffect` -> `onMounted()` / `watch()`
+    - `useContext` -> `provide()` / `inject()` or Pinia stores.
+3.  **Tailwind v4**: Ensure the `theme.css` variables are correctly loaded in `nuxt.config.ts` or a global CSS file.
+
+---
+*Generated by Figma Make Assistant for Nuxt Migration Handover.*

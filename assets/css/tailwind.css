@@ -1,0 +1,6 @@
+/* Import theme CSS variables and custom layers */
+@import './theme.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
