@@ -31,7 +31,37 @@
       </button>
     </div>
 
-    <!-- Button 2: Back to Top -->
+    <!-- Button 2: Customer Service -->
+    <div class="relative">
+      <Transition
+        enter-active-class="transition-all duration-200"
+        leave-active-class="transition-all duration-200"
+        enter-from-class="opacity-0 translate-x-2"
+        enter-to-class="opacity-1 translate-x-0"
+        leave-from-class="opacity-1 translate-x-0"
+        leave-to-class="opacity-0 translate-x-2"
+      >
+        <div
+          v-if="hoveredButton === 'service'"
+          class="absolute right-[56px] top-0 h-[48px] sm:h-[56px] flex items-center max-w-[min(calc(100vw-8rem),280px)] sm:max-w-none bg-[#006EFF] text-white px-3 sm:px-4 rounded-lg shadow-lg pointer-events-none"
+        >
+          <MessageCircle class="w-4 h-4 mr-2 flex-shrink-0" />
+          <span class="text-xs sm:text-[14px] font-bold truncate">在线客服</span>
+        </div>
+      </Transition>
+      
+      <button
+        @mouseenter="hoveredButton = 'service'"
+        @mouseleave="hoveredButton = null"
+        @click="openCustomerService"
+        class="w-14 h-14 bg-[#006EFF] rounded-lg shadow-[0_4px_12px_rgba(0,110,255,0.3)] flex flex-col items-center justify-center text-white transition-all hover:scale-105 active:scale-95 cursor-pointer border-none"
+      >
+        <MessageCircle class="w-6 h-6" />
+        <span class="text-[10px] mt-0.5 font-bold">客服</span>
+      </button>
+    </div>
+
+    <!-- Button 3: Back to Top -->
     <Transition
       enter-active-class="transition-all duration-200"
       leave-active-class="transition-all duration-200"
@@ -56,7 +86,8 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { 
   BellRing, 
   ChevronUp, 
-  Phone
+  Phone,
+  MessageCircle
 } from 'lucide-vue-next'
 
 const emit = defineEmits<{
@@ -76,6 +107,10 @@ const handleScroll = () => {
 
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+const openCustomerService = () => {
+  window?.qimoChatClick?.()
 }
 
 onMounted(() => {

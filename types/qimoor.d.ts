@@ -72,6 +72,7 @@ declare global {
     lcc_im?: any
     _7moor?: any
     requestIdleCallback?: (callback: () => void) => void
+    qimoChatClick?: () => void
   }
 }
 
@@ -90,4 +91,4 @@ declare module 'vue' {
   }
 }
 
-export {}
+export { }
