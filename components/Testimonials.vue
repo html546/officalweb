@@ -27,9 +27,9 @@
           :visible-once="{ opacity: 1, scale: 1, transition: { delay: 300 } }"
           class="flex flex-row items-center justify-center mt-8"
         >
-          <div class="flex flex-row items-baseline gap-2">
+          <div class="flex flex-row items-center gap-2">
             <span class="text-4xl font-bold text-[#FF6B00]">4.9</span>
-            <div class="flex gap-1 mb-1">
+            <div class="flex gap-1">
               <Star
                 v-for="i in 5"
                 :key="i"

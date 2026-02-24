@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  
+
   modules: [
     '@nuxtjs/tailwindcss',
     '@vueuse/motion/nuxt',
@@ -60,9 +60,9 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { 
-          name: 'description', 
-          content: '连接运力、货主与救援服务的综合性数字平台。自研 AI 智能调度系统，连接 70万+ 运力，已安全交付 2500万+ 台次。' 
+        {
+          name: 'description',
+          content: '连接运力、货主与救援服务的综合性数字平台。自研 AI 智能调度系统，连接 70万+ 运力，已安全交付 2500万+ 台次。'
         }
       ],
       link: [
@@ -101,6 +101,6 @@ export default defineNuxtConfig({
 
   devServer: {
     port: 3001,
-    host: '0.0.0.0'
+    host: '127.0.0.1'
   }
 })
