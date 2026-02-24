@@ -82,7 +82,7 @@ watch(
   (newSrc) => {
     currentSrc.value = newSrc;
     hasError.value = false;
-    isLoading.value = true;
+    isLoading.value = false;
   },
   { immediate: true }
 );
@@ -92,6 +92,5 @@ watch(
 img {
   display: block;
   max-width: 100%;
-  height: auto;
 }
 </style>

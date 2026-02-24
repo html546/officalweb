@@ -62,11 +62,13 @@
           <!-- User Info -->
           <div class="flex items-center gap-4 mb-6 relative">
             <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-white shadow-sm ring-1 ring-gray-100">
-              <ImageWithFallback
-                :src="item.avatar"
-                :alt="item.user"
-                class="w-full h-full object-cover"
-              />
+              <ClientOnly>
+                <ImageWithFallback
+                  :src="item.avatar"
+                  :alt="item.user"
+                  class="w-full h-full object-cover"
+                />
+              </ClientOnly>
             </div>
             <div>
               <h4 class="text-[18px] font-bold text-[#0B2747]">

@@ -39,7 +39,7 @@
             <ImageWithFallback
               :src="item.image"
               :alt="item.title"
-              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              class="w-full h-full transition-transform duration-500 group-hover:scale-105"
             />
             <!-- Tag -->
             <div class="absolute top-0 left-0 bg-[#FF6B00] text-white px-3 py-1 text-xs font-bold rounded-br-lg shadow-md z-10">
@@ -65,16 +65,12 @@
 <script setup lang="ts">
 import ImageWithFallback from '@/components/ImageWithFallback.vue'
 
-// EXTERNAL_ASSETS for images
-const undergroundImg = 'https://images.unsplash.com/photo-1762232621838-2308d2d5ba33?q=80&w=1080'
-const highwayImg = 'https://images.unsplash.com/photo-1591768793355-74d7c80b0e17?q=80&w=2000'
-
 const cases = [
   {
     tag: '地库救援',
     title: '解决 2.2米 限高地库难题',
     desc: '王先生的车辆在地下三层亏电无法启动。车拖车调度低姿态专用板车进入地库，通过搭电辅助+软连接牵引，成功将车辆移出并装车托运。',
-    image: undergroundImg,
+    image: 'https://images.unsplash.com/photo-1762232621838-2308d2d5ba33?q=80&w=1080',
   },
   {
     tag: '托运接驳',
@@ -86,7 +82,7 @@ const cases = [
     tag: '高速救援',
     title: '高速故障 20分钟响应',
     desc: 'G4高速某路段车辆抛锚。系统自动匹配最近网点，救援车 18分钟 抵达现场。设置安全警示后，规范背车驶离，避免了二次事故风险。',
-    image: highwayImg,
+    image: 'https://images.unsplash.com/photo-1644442076205-627648a62844?q=80&w=500',
   },
 ]
 </script>
